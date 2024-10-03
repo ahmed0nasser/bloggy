@@ -1,0 +1,29 @@
+<header class="relative px-7 py-3 bg-red-600 flex justify-between items-center">
+    <span class="logo text-3xl md:text-4xl"><a href="/" title="Logo">Bloggy</a></span>
+    <nav>
+        <button class="w-6 fill-white flex justify-end sm:hidden" onclick="this.nextElementSibling.classList.toggle('hidden')" title="Navigation Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
+            </svg>
+        </button>
+        <ul class="hidden w-1/2 absolute top-full right-0 bg-red-600/70 text-white text-lg md:text-xl text-center border-2 border-white sm:relative sm:flex sm:border-none">
+            <% const aClass = "block py-2 px-8 hover:bg-red-800 duration-500 tracking-widest" %>
+            <li class="">
+                <a href="/" title="Home Page" class="<%= aClass %>">Home</a>
+            </li>
+            <li class="border-y-2 sm:border-y-0 sm:border-x-2">
+                <a href="/blogs" title="Blogs Page" class="<%= aClass %>">Blogs</a>
+            </li>
+            <li class="">
+            <% if (locals.user) {%>
+                <a href="/profile" title="<%= locals.user.name %> Profile Page" class="<%= aClass %>">
+                    <img src="<%= locals.user.imgSrc %>" alt="<%= locals.user.name %> Picture">
+                    <%= locals.user.name %>
+                </a>
+            <% } else { %>
+                <a href="/login" title="Login Page" class="<%= aClass %>">Login</a>
+            <% } %>
+            </li>
+        </ul>
+    </nav>
+</header>
