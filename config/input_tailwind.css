@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: 'Inika';
+        src: url(/fonts/Inika/Inika-Bold.ttf);
+    }
+    
+    @font-face {
+        font-family: 'Inria_Serif';
+        src: url(/fonts/Inria_Serif/InriaSerif-Italic.ttf);
+    }
+    
+    @font-face {
+        font-family: 'Inria_Sans';
+        src: url(/fonts/Inria_Sans/InriaSans-Regular.ttf);
+        font-weight: initial;
+    }
+    
+    @font-face {
+        font-family: 'Inria_Sans';
+        src: url(/fonts/Inria_Sans/InriaSans-Bold.ttf);
+        font-weight: bold;
+    }    
+}
+
+@layer components {
+    .logo {
+        @apply text-white font-inika tracking-tighter;
+    }
+}
