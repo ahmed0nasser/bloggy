@@ -1,5 +1,5 @@
-<header class="relative px-7 py-3 bg-primary flex justify-between items-center">
-    <span class="logo text-3xl md:text-4xl"><a href="/" title="Logo">Bloggy</a></span>
+<header class="relative px-7 py-3 lg:py-6 *:min-h-full bg-primary flex justify-between items-center">
+    <span class="logo text-3xl md:text-4xl lg:text-5xl"><a href="/" title="Logo">Bloggy</a></span>
     <nav>
         <button class="w-6 fill-white flex justify-end sm:hidden"
             onclick="this.nextElementSibling.classList.toggle('hidden')" title="Navigation Menu">
@@ -9,7 +9,7 @@
             </svg>
         </button>
         <ul
-            class="hidden min-w-[50%] sm:flex absolute sm:relative top-full right-0 bg-primary/70 text-white text-lg md:text-xl text-center border-2 border-white sm:border-none">
+            class="hidden min-w-[50%] sm:flex absolute sm:relative top-full right-0 bg-primary/70 text-white text-lg md:text-xl lg:text-2xl text-center border-2 border-white sm:border-none">
             <% const aClass="block h-full py-2 px-8 hover:bg-secondary duration-500 tracking-widest " %>
                 <li>
                     <a href="/" title="Home Page" class="<%= aClass %>">Home</a>
@@ -20,7 +20,7 @@
                 <li>
                     <% if (locals.user) {%>
                         <a href="/profile" title="<%= locals.user.name %> Profile Page"
-                            class="<%= aClass %> flex justify-center items-center text-sm sm:text-base text-nowrap">
+                            class="<%= aClass %> flex justify-center items-center text-sm sm:text-base lg:text-lg text-nowrap">
                             <img src="<%= locals.user.imgSrc %>" alt="<%= locals.user.name %> Picture"
                                 class="rounded-full border-2 w-8 h-8 mr-2">
                             <%= locals.user.name %>
