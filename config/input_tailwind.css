@@ -30,4 +30,8 @@
     .logo {
         @apply text-white font-inika tracking-tighter;
     }
+    
+    .separator {
+        @apply w-[90%] h-0.5 mx-auto sm:my-4 bg-secondary border-0;
+    }
 }
