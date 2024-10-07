@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
+    <link rel="manifest" href="/icon/site.webmanifest">
+    <!-- Title -->
+    <title>Blogs - Bloggy</title>
+</head>
+
+<body>
+    <%- include("header", {user: locals.user}) %>
+        <main class="min-h-[95vh]">
+            <div class="container px-5 sm:px-6 lg:px-12 xl:px-16 2xl:px-48 mx-auto">
+                <h1 class="py-3 text-center sm:pb-0 text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-bold">Blogs</h1>
+                <hr class="separator">
+                <button
+                    onclick="const blog = this.nextElementSibling.innerHTML; this.nextElementSibling.insertAdjacentHTML('afterbegin', blog)"
+                    class="bg-grey-light text-white">
+                    Add blog
+                </button>
+                <section class="py-5 grid gap-6 xl:gap-8 grid-cols-[repeat(auto-fit,minmax(17rem,1fr))]">
+                    <article class="px-3 xl:px-4 py-3 xl:py-4 border-2 border-secondary rounded-lg bg-grey-light/10">
+                        <div class="">
+                            <h2 class="text-xl md:text-2xl xl:text-3xl font-bold">Blog Title</h2>
+                            <div class="-mt-0.5 text-xs md:text-sm lg:text-base text-grey-heavy">Publishing date</div>
+                        </div>
+                        <p class="py-2 text-sm md:text-base xl:text-lg">Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit. Donec ut augue
+                            dignissim.
+                        </p>
+                        <div class="text-right md:mt-2">
+                            <a href=""
+                                class="py-1 px-2 xl:px-3 rounded-md text-sm lg:text-base xl:text-lg text-white bg-primary hover:bg-secondary duration-500">Read
+                                more</a>
+                        </div>
+                    </article>
+                </section>
+            </div>
+        </main>
+        <%- include("footer") %>
+</body>
+
+</html>
