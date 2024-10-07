@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
+    <link rel="manifest" href="/icon/site.webmanifest">
+    <!-- Title -->
+    <title>Login - Bloggy</title>
+</head>
+
+<body>
+    <%- include("header", {user: locals.user}) %>
+        <div class="px-8 text-center flex flex-col">
+            <h1 class="mt-16 text-3xl sm:text-4xl lg:text-5xl font-bold">Login</h1>
+            <form action="/login" method="post" class="*:mt-5 md:*:mt-7 caret-primary">
+                <div class="sm:px-24 lg:px-40 xl:px-80 space-y-3 sm:space-y-5 flex flex-col">
+                    <input type="text" name="username" placeholder="Username"
+                        class="pl-2 sm:pl-4 lg:pl-6 py-1 sm:py-2 lg:py-3 border border-primary rounded focus:outline-none focus:border-secondary placeholder:text-grey-light/40">
+                    <input type="password" name="password" placeholder="Password"
+                        class="pl-2 sm:pl-4 lg:pl-6 py-1 sm:py-2 lg:py-3 border border-primary rounded focus:outline-none focus:border-secondary placeholder:text-grey-light/40">
+                </div>
+                <div class="sm:text-lg lg:text-xl">
+                    Don't have an account? <a href="/signup" class="underline text-grey-heavy">Sign up</a>
+                </div>
+                <input type="submit" value="Login"
+                    class="py-1 sm:py-2 px-7 sm:px-8 md:px-9 lg:px-10 xl:px-12 text-white md:text-lg lg:text-xl bg-primary hover:bg-secondary duration-500 cursor-pointer rounded-md">
+            </form>
+            <div class="mt-5 md:mt-8 text-xs sm:text-sm md:text-base lg:text-lg ">
+                Make sure that you have both read and agree to our <a href="" class="underline">Terms of Service and
+                    Privacy Policy.</a>
+            </div>
+        </div>
+</body>
+
+</html>
