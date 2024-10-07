@@ -18,31 +18,35 @@
 
 <body>
     <%- include("header", {user: locals.user}) %>
-        <main class="min-h-[95vh]">
+        <main>
             <div class="container px-5 sm:px-6 lg:px-12 xl:px-16 2xl:px-48 mx-auto">
                 <h1 class="py-3 text-center sm:pb-0 text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-bold">Blogs</h1>
                 <hr class="separator">
-                <button
-                    onclick="const blog = this.nextElementSibling.innerHTML; this.nextElementSibling.insertAdjacentHTML('afterbegin', blog)"
-                    class="bg-grey-light text-white">
-                    Add blog
-                </button>
                 <section class="py-5 grid gap-6 xl:gap-8 grid-cols-[repeat(auto-fit,minmax(17rem,1fr))]">
-                    <article class="px-3 xl:px-4 py-3 xl:py-4 border-2 border-secondary rounded-lg bg-grey-light/10">
-                        <div class="">
-                            <h2 class="text-xl md:text-2xl xl:text-3xl font-bold">Blog Title</h2>
-                            <div class="-mt-0.5 text-xs md:text-sm lg:text-base text-grey-heavy">Publishing date</div>
-                        </div>
-                        <p class="py-2 text-sm md:text-base xl:text-lg">Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit. Donec ut augue
-                            dignissim.
-                        </p>
-                        <div class="text-right md:mt-2">
-                            <a href=""
-                                class="py-1 px-2 xl:px-3 rounded-md text-sm lg:text-base xl:text-lg text-white bg-primary hover:bg-secondary duration-500">Read
-                                more</a>
-                        </div>
-                    </article>
+                    <% if (!locals.blogEntries || locals.blogEntries.length == 0) {%>
+                        <div class="min-h-[70vh] flex justify-center items-center font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">Sorry, No Blogs Available Right Now.</div>
+                    <% } else locals.blogEntries.forEach(blogEntry => { %>
+                        <article
+                            class="h-fit px-3 xl:px-4 py-3 xl:py-4 border-2 border-secondary rounded-lg bg-grey-light/10">
+                            <div>
+                                <h2 class="text-xl md:text-2xl xl:text-3xl font-bold">
+                                    <%= blogEntry.title %>
+                                </h2>
+                                <div class="-mt-0.5 text-xs md:text-sm lg:text-base text-grey-heavy">
+                                    <%= blogEntry.date %>
+                                </div>
+                            </div>
+                            <p class="py-2 text-sm md:text-base xl:text-lg">
+                                <%= blogEntry.description %>
+                            </p>
+                            <div class="text-right md:mt-2">
+                                <a href="<%= " /blogs/" + blogEntry.id %>"
+                                    class="py-1 px-2 xl:px-3 rounded-md text-sm lg:text-base xl:text-lg text-white
+                                    bg-primary hover:bg-secondary duration-500">Read
+                                    more</a>
+                            </div>
+                        </article>
+                        <% }); %>
                 </section>
             </div>
         </main>
