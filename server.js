@@ -34,9 +34,11 @@ app.route("/login")
     res.render("login")
 })
 .post((req, res) => {
-    // #TODO: Validate sent user data in req.data
-    // #TODO: Fetch user's imgSrc
-    // #TODO: Construct user object and assign it to variable user
+    if (!validationController.isValidUsername(req.body.username))
+        res.send("Invalid Username")
+    if (!validationController.isValidPassword(req.body.password))
+        res.send("Invalid Password")
+        
     user = {name: req.body.username, imgSrc:""}
     res.redirect("/")
 })
