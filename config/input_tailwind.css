@@ -23,7 +23,11 @@
         font-family: 'Inria_Sans';
         src: url(/fonts/Inria_Sans/InriaSans-Bold.ttf);
         font-weight: bold;
-    }    
+    }
+
+    main {
+        @apply min-h-[80vh];
+    }
 }
 
 @layer components {
@@ -32,6 +36,10 @@
     }
     
     .separator {
-        @apply w-[90%] h-0.5 mx-auto sm:my-4 bg-secondary border-0;
+        @apply w-[90%] h-0.5 bg-secondary border-0;
+    }
+
+    .container {
+        @apply px-5 sm:px-6 lg:px-12 xl:px-16 2xl:px-48 mx-auto;
     }
 }
