@@ -3,7 +3,7 @@ const express = require("express")
 const validationController = require("./controllers/validationController")
 
 const app = express()
-// const user = {name: '123456789_123456789_', imgSrc: "data:image/jpeg;base64," + fs.readFileSync("./public/imgs/author.jpeg", {encoding: 'base64'})}
+const user = {name: '123456789_123456789_123456789', imgSrc: "data:image/jpeg;base64," + fs.readFileSync("./public/imgs/author.jpeg", {encoding: 'base64'})}
 const blogEntry = {id:1,title:"Blog Title", date:"Publishing date", description:"blog description you wanna write"}
 const blogEntries = []
 for (let i = 0; i < 5; i++) {
@@ -11,7 +11,7 @@ for (let i = 0; i < 5; i++) {
 }
 
 // Logged-in user
-let user = null
+// let user = null
 
 // Template Engine
 app.set('view engine', 'ejs')
@@ -27,6 +27,10 @@ app.get("/", (req, res) => {
 
 app.get("/blogs", (req, res) => {
     res.render("blogs", {user, blogEntries})
+})
+
+app.get("/blogs/1", (req, res) => {
+    res.render("blog", {user})
 })
 
 app.route("/login")
