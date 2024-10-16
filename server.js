@@ -33,6 +33,10 @@ app.get("/blogs/1", (req, res) => {
     res.render("blog", {user})
 })
 
+app.get("/edit", (req, res) => {
+    res.render("blogEdit", {user})
+})
+
 app.route("/login")
 .get((req, res) => {
     res.render("login")
