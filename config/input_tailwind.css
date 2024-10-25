@@ -28,6 +28,10 @@
     main {
         @apply min-h-[80vh];
     }
+
+    form {
+        @apply caret-primary;
+    }
 }
 
 @layer components {
