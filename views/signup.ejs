@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Favicon -->
+    <%- include("favicon") %>
+    <!-- Title -->
+    <title>Sign up - Bloggy</title>
+</head>
+
+<body>
+    <%- include("header", {user: locals.user}) %>
+    <main>
+        <div class="px-8 text-center flex flex-col">
+            <h1 class="mt-16 text-3xl sm:text-4xl lg:text-5xl font-bold">Sign up</h1>
+            <form method="post" class="*:mt-5 md:*:mt-7 caret-primary">
+                <div class="sm:px-24 lg:px-40 xl:px-80 space-y-3 sm:space-y-5 flex flex-col">                    
+                    <% const inputClass = "pl-2 sm:pl-4 lg:pl-6 py-1 sm:py-2 lg:py-3 border border-primary rounded focus:outline-none focus:border-secondary placeholder:text-grey-light/40" %>
+                    <input type="text" name="username" placeholder="Username" required minlength="3" maxlength="30"
+                        class="<%= inputClass %>">
+                    <input type="password" name="password" placeholder="Password" required minlength="8"
+                        class="<%= inputClass %>">
+                </div>
+                <div class="sm:text-lg lg:text-xl">
+                    Already have an account? <a href="/login" class="underline text-grey-heavy">Login</a>
+                </div>
+                <input type="submit" value="Sign up"
+                    class="py-1 sm:py-2 px-7 sm:px-8 md:px-9 lg:px-10 xl:px-12 text-white md:text-lg lg:text-xl bg-primary hover:bg-secondary duration-500 cursor-pointer rounded-md">
+            </form>
+            <div class="mt-5 md:mt-8 text-xs sm:text-sm md:text-base lg:text-lg ">
+                Make sure that you have both read and agree to our <a href="/policies" class="underline">Terms of Service and
+                    Privacy Policy.</a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
