@@ -1,8 +1,11 @@
 const fs = require('fs')
+const path = require('path')
 const express = require("express")
+const morgan = require('morgan')
 const validateUserInfo = require("./middleware/validateUserInfo")
 
 const app = express()
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
 // const user = {name: '123456789_123456789_123456789', imgSrc: "data:image/jpeg;base64," + fs.readFileSync("./public/imgs/author.jpeg", {encoding: 'base64'})}
 const blogEntry = {id:1,title:"Blog Title", date:"Publishing date", description:"blog description you wanna write"}
 const blogEntries = []
@@ -19,6 +22,7 @@ app.set('view engine', 'ejs')
 // Middleware
 app.use(express.static("public"))
 app.use(express.urlencoded({extended:true}))
+app.use(morgan('tiny', { stream: accessLogStream }))
 
 // Routes
 app.get("/", (req, res) => {
