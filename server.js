@@ -1,9 +1,9 @@
 const fs = require('fs')
 const express = require("express")
-const validationController = require("./controllers/validationController")
+const validateUserInfo = require("./middleware/validateUserInfo")
 
 const app = express()
-const user = {name: '123456789_123456789_123456789', imgSrc: "data:image/jpeg;base64," + fs.readFileSync("./public/imgs/author.jpeg", {encoding: 'base64'})}
+// const user = {name: '123456789_123456789_123456789', imgSrc: "data:image/jpeg;base64," + fs.readFileSync("./public/imgs/author.jpeg", {encoding: 'base64'})}
 const blogEntry = {id:1,title:"Blog Title", date:"Publishing date", description:"blog description you wanna write"}
 const blogEntries = []
 for (let i = 0; i < 5; i++) {
@@ -11,7 +11,7 @@ for (let i = 0; i < 5; i++) {
 }
 
 // Logged-in user
-// let user = null
+let user = null
 
 // Template Engine
 app.set('view engine', 'ejs')
@@ -41,18 +41,20 @@ app.route("/login")
 .get((req, res) => {
     res.render("login")
 })
-.post((req, res) => {
-    if (!validationController.isValidUsername(req.body.username))
-        res.send("Invalid Username")
-    if (!validationController.isValidPassword(req.body.password))
-        res.send("Invalid Password")
-        
+.post(validateUserInfo, (req, res) => {
     user = {name: req.body.username, imgSrc:""}
-    res.redirect("/")
+    res.redirect("/")    
 })
 
-app.get("/signup", (req, res) => {
+app.route("/signup")
+.get((req, res) => {
     res.render("signup")
+})
+.post(validateUserInfo, (req, res) => {
+    // TODO: make new entry in database
+    // TODO: return user
+    user = {name: req.body.username, imgSrc:""}
+    res.redirect("/")
 })
 
 app.listen(5000)
