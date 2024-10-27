@@ -11,4 +11,12 @@ function isValidPassword(password) {
   return true;
 }
 
-module.exports = { isValidUsername, isValidPassword };
+async function validateUserInfo(req, res, next) {
+  if (!validationController.isValidUsername(req.body.username))
+    res.status(404).send("Invalid Username")
+  if (!validationController.isValidPassword(req.body.password))
+    res.status(404).send("Invalid Password")
+  next()
+}
+
+module.exports = { isValidUsername, isValidPassword, validateUserInfo };

@@ -2,7 +2,6 @@ const fs = require('fs')
 const path = require('path')
 const express = require("express")
 const morgan = require('morgan')
-const validateUserInfo = require("./middleware/validateUserInfo")
 
 const app = express()
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
@@ -45,7 +44,7 @@ app.route("/login")
 .get((req, res) => {
     res.render("login")
 })
-.post(validateUserInfo, (req, res) => {
+.post((req, res) => {
     user = {name: req.body.username, imgSrc:""}
     res.redirect("/")    
 })
@@ -54,11 +53,11 @@ app.route("/signup")
 .get((req, res) => {
     res.render("signup")
 })
-.post(validateUserInfo, (req, res) => {
+.post((req, res) => {
     // TODO: make new entry in database
     // TODO: return user
     user = {name: req.body.username, imgSrc:""}
     res.redirect("/")
 })
 
-app.listen(5000)
+app.listen(process.env.PORT)
