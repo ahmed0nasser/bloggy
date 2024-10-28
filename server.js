@@ -25,24 +25,24 @@ app.use(morgan('tiny', { stream: accessLogStream }))
 
 // Routes
 app.get("/", (req, res) => {
-    res.render("index", {user})
+    res.render("pages/index", {user})
 })
 
 app.get("/blogs", (req, res) => {
-    res.render("blogs", {user, blogEntries})
+    res.render("pages/blogs", {user, blogEntries})
 })
 
 app.get("/blogs/1", (req, res) => {
-    res.render("blog", {user})
+    res.render("pages/blog", {user})
 })
 
 app.get("/edit", (req, res) => {
-    res.render("blogEdit", {user})
+    res.render("pages/blogEdit", {user})
 })
 
 app.route("/login")
 .get((req, res) => {
-    res.render("login")
+    res.render("pages/login")
 })
 .post((req, res) => {
     user = {name: req.body.username, imgSrc:""}
@@ -51,7 +51,7 @@ app.route("/login")
 
 app.route("/signup")
 .get((req, res) => {
-    res.render("signup")
+    res.render("pages/signup")
 })
 .post((req, res) => {
     // TODO: make new entry in database

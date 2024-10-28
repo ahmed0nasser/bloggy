@@ -7,19 +7,19 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- Favicon -->
-    <%- include("favicon") %>
+    <%- include("../components/favicon") %>
     <!-- Title -->
-    <title>Sign up - Bloggy</title>
+    <title>Login - Bloggy</title>
 </head>
 
 <body>
-    <%- include("header", {user: locals.user}) %>
+    <%- include("../components/header", {user: locals.user}) %>
     <% if (locals.error) {%>
-        <%- include("popup", {message: locals.error.message}) %>
+        <%- include("../components/popup", {message: locals.error.message}) %>
     <% } %>
     <main>
         <div class="px-8 text-center flex flex-col">
-            <h1 class="mt-16 text-3xl sm:text-4xl lg:text-5xl font-bold">Sign up</h1>
+            <h1 class="mt-16 text-3xl sm:text-4xl lg:text-5xl font-bold">Login</h1>
             <form method="post" class="*:mt-5 md:*:mt-7">
                 <div class="sm:px-24 lg:px-40 xl:px-80 space-y-3 sm:space-y-5 flex flex-col">                    
                     <% const inputClass = "pl-2 sm:pl-4 lg:pl-6 py-1 sm:py-2 lg:py-3 border border-primary rounded focus:outline-none focus:border-secondary placeholder:text-grey-light/40" %>
@@ -29,9 +29,9 @@
                         class="<%= inputClass %>">
                 </div>
                 <div class="sm:text-lg lg:text-xl">
-                    Already have an account? <a href="/login" class="underline text-grey-heavy">Login</a>
+                    Don't have an account? <a href="/signup" class="underline text-grey-heavy">Sign up</a>
                 </div>
-                <input type="submit" value="Sign up"
+                <input type="submit" value="Login"
                     class="py-1 sm:py-2 px-7 sm:px-8 md:px-9 lg:px-10 xl:px-12 text-white md:text-lg lg:text-xl bg-primary hover:bg-secondary duration-500 cursor-pointer rounded-md">
             </form>
             <div class="mt-5 md:mt-8 text-xs sm:text-sm md:text-base lg:text-lg ">

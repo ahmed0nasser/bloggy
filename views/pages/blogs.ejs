@@ -7,13 +7,13 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- Favicon -->
-    <%- include("favicon") %>
+    <%- include("../components/favicon") %>
     <!-- Title -->
     <title>Blogs - Bloggy</title>
 </head>
 
 <body>
-    <%- include("header", {user: locals.user}) %>
+    <%- include("../components/header", {user: locals.user}) %>
         <main>
             <div class="container">
                 <section class="py-4">
@@ -53,7 +53,7 @@
                 </section>
             </div>
         </main>
-        <%- include("footer") %>
+        <%- include("../components/footer") %>
 </body>
 
 </html>

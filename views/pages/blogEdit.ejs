@@ -7,13 +7,13 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- Favicon -->
-    <%- include("favicon") %>
+    <%- include("../components/favicon") %>
     <!-- Title -->
     <title>Editing:Blog Title - Bloggy</title>
 </head>
 
 <body>
-    <%- include("header", {user: locals.user}) %>
+    <%- include("../components/header", {user: locals.user}) %>
         <main>
             <div class="container">
                 <!-- Edit Blog Section -->
@@ -41,7 +41,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut augue dignissi
                 </section>
             </div>
         </main>
-        <%- include("footer") %>
+        <%- include("../components/footer") %>
 </body>
 
 </html>

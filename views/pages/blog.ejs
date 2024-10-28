@@ -7,13 +7,13 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- Favicon -->
-    <%- include("favicon") %>
+    <%- include("../components/favicon") %>
     <!-- Title -->
     <title>Blog Title - Bloggy</title>
 </head>
 
 <body>
-    <%- include("header", {user: locals.user}) %>
+    <%- include("../components/header", {user: locals.user}) %>
         <main>
             <div class="container">
                 <!-- Blog Content Section -->
@@ -99,7 +99,7 @@
                 </section>
             </div>
         </main>
-        <%- include("footer") %>
+        <%- include("../components/footer") %>
 </body>
 
 </html>
