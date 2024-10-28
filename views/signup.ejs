@@ -14,6 +14,9 @@
 
 <body>
     <%- include("header", {user: locals.user}) %>
+    <% if (locals.error) {%>
+        <%- include("popup", {message: locals.error.message}) %>
+    <% } %>
     <main>
         <div class="px-8 text-center flex flex-col">
             <h1 class="mt-16 text-3xl sm:text-4xl lg:text-5xl font-bold">Sign up</h1>

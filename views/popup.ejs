@@ -1,0 +1,11 @@
+<div id="popup" class="size-full bg-grey-heavy bg-opacity-50 absolute top-0 z-10">
+  <div class="min-w-full sm:min-w-[60vw] space-y-2 lg:space-y-4 xl:space-y-6 py-3 lg:py-4 xl:py-5 2xl:py-6 px-3 lg:px-5 text-center text-nowrap text-sm sm:text-base lg:text-lg xl:text-xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white sm:border border-secondary sm:rounded shadow-lg">
+      <div class="flex justify-center items-center gap-2 lg:gap-4 xl:gap-8">
+          <svg class="size-8 lg:size-12 fill-primary" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24l0 112c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-112c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg>
+          <p><%= locals.message %></p>
+      </div>
+      <div class="text-right">
+          <button class="py-0.5 px-3 sm:px-4 lg:px-5 2xl:px-6 bg-primary text-white rounded" onclick="document.getElementById('popup').classList.add('hidden')">Ok</button>
+      </div>
+  </div>
+</div>
