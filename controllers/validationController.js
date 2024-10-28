@@ -1,3 +1,5 @@
+const RequestError = require("../Errors/RequestError")
+
 function isValidUsername(username) {
   if (!(typeof username === "string")) return false;
   if (username.length < 3) return false;
@@ -11,12 +13,12 @@ function isValidPassword(password) {
   return true;
 }
 
-async function validateUserInfo(req, res, next) {
-  if (!validationController.isValidUsername(req.body.username))
-    res.status(404).send("Invalid Username")
-  if (!validationController.isValidPassword(req.body.password))
-    res.status(404).send("Invalid Password")
-  next()
+function validateUserInfo(username, password) {
+  if (validationController.isValidUsername(username))
+    throw new RequestError("Invalid Username", 400);
+
+  if (validationController.isValidPassword(password))
+    throw new RequestError("Invalid Password", 400);
 }
 
 module.exports = { isValidUsername, isValidPassword, validateUserInfo };
