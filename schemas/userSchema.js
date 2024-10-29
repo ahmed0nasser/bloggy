@@ -1,9 +1,10 @@
-const { Schema } = require('mongoose')
+const { Schema } = require("mongoose");
 
 module.exports = new Schema({
   _id: Number,
   name: String,
   password: String,
-  description: {type: String, default: ""},
-  img: String
-})
+  description: { type: String, default: "" },
+  img: String,
+  sessionID: { type: String, default: "" },
+});

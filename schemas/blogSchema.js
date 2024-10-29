@@ -1,10 +1,20 @@
-const { Schema } = require('mongoose')
+const { Schema } = require("mongoose");
 
 module.exports = new Schema({
   _id: Number,
   title: String,
   body: String,
   summary: String,
-  date: {type: Date, default: Date.now},
-  comments: [ { author: { name: String, img: String }, body: String, likes: Number, date: Date } ]
-})
+  date: { type: Date, default: Date.now },
+  comments: {
+    type: [
+      {
+        author: { name: String, img: String },
+        body: String,
+        likes: { type: Number, default: 0 },
+        date: { type: Date, default: Date.now },
+      },
+    ],
+    default: [],
+  },
+});

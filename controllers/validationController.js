@@ -1,4 +1,4 @@
-const RequestError = require("../Errors/RequestError")
+const RequestError = require("../Errors/RequestError");
 
 function isValidUsername(username) {
   if (!(typeof username === "string")) return false;
