@@ -21,4 +21,4 @@ async function handleLogin(req, res, next) {
   }
 }
 
-module.exports = { handleNewUser };
+module.exports = { handleLogin };

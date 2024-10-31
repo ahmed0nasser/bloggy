@@ -14,10 +14,10 @@ function isValidPassword(password) {
 }
 
 function validateUserInfo(username, password) {
-  if (validationController.isValidUsername(username))
+  if (!isValidUsername(username))
     throw new RequestError("Invalid Username", 400);
 
-  if (validationController.isValidPassword(password))
+  if (!isValidPassword(password))
     throw new RequestError("Invalid Password", 400);
 }
 
