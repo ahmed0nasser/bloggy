@@ -5,6 +5,7 @@ module.exports = new Schema({
   title: String,
   body: String,
   summary: String,
+  uri: String,
   date: { type: Date, default: Date.now },
   comments: {
     type: [

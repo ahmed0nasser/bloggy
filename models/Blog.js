@@ -1,4 +1,4 @@
-const { model } = require('mongoose')
-const blogSchema = require('../schemas/blogSchema')
+const { model } = require("mongoose");
+const blogSchema = require("../schemas/blogSchema");
 
-module.exports = model('Blog', blogSchema)
+module.exports = model("Blog", blogSchema);
