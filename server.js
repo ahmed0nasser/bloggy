@@ -1,63 +1,52 @@
-const fs = require('fs')
-const path = require('path')
-const express = require("express")
-const morgan = require('morgan')
+const fs = require("fs");
+const path = require("path");
+const express = require("express");
+const mongoose = require("mongoose");
+const usersController = require("./controllers/usersController");
+// Require Middleware
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
+const session = require("./middleware/session");
 
-const app = express()
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
-// const user = {name: '123456789_123456789_123456789', imgSrc: "data:image/jpeg;base64," + fs.readFileSync("./public/imgs/author.jpeg", {encoding: 'base64'})}
-const blogEntry = {id:1,title:"Blog Title", date:"Publishing date", description:"blog description you wanna write"}
-const blogEntries = []
-for (let i = 0; i < 5; i++) {
-    blogEntries.push(blogEntry)
-}
+const app = express();
 
-// Logged-in user
-let user = null
+// Create log stream
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, "access.log"),
+  { flags: "a" }
+);
+
+setImmediate(async () => {
+  // Connect to DB
+  await mongoose.connect(process.env.DB_CONNECTION_STRING);
+  // Create admin if not exists
+  if (!(await usersController.getUserByName(process.env.ADMIN_USERNAME)))
+    await usersController.createNewAdmin(
+      process.env.ADMIN_USERNAME,
+      process.env.ADMIN_PASSWORD
+    );
+});
 
 // Template Engine
-app.set('view engine', 'ejs')
+app.set("view engine", "ejs");
 
 // Middleware
-app.use(express.static("public"))
-app.use(express.urlencoded({extended:true}))
-app.use(morgan('tiny', { stream: accessLogStream }))
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(session);
+app.use(morgan("tiny", { stream: accessLogStream }));
+// Routers
+app.use("/login", require("./routes/login"));
+app.use("/logout", require("./routes/logout"));
+app.use("/signup", require("./routes/signup"));
+app.use("/blogs", require("./routes/blogs"));
 
 // Routes
 app.get("/", (req, res) => {
-    res.render("pages/index", {user})
-})
+  res.render("pages/index", { user: req.user });
+});
 
-app.get("/blogs", (req, res) => {
-    res.render("pages/blogs", {user, blogEntries})
-})
+// #TODO: create all route for unavailable pages (404)
 
-app.get("/blogs/1", (req, res) => {
-    res.render("pages/blog", {user})
-})
-
-app.get("/edit", (req, res) => {
-    res.render("pages/blogEdit", {user})
-})
-
-app.route("/login")
-.get((req, res) => {
-    res.render("pages/login")
-})
-.post((req, res) => {
-    user = {name: req.body.username, imgSrc:""}
-    res.redirect("/")    
-})
-
-app.route("/signup")
-.get((req, res) => {
-    res.render("pages/signup")
-})
-.post((req, res) => {
-    // TODO: make new entry in database
-    // TODO: return user
-    user = {name: req.body.username, imgSrc:""}
-    res.redirect("/")
-})
-
-app.listen(process.env.PORT)
+app.listen(process.env.PORT);
