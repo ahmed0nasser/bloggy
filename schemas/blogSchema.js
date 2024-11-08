@@ -6,14 +6,15 @@ module.exports = new Schema({
   body: String,
   summary: String,
   uri: String,
-  date: { type: Date, default: Date.now },
+  date: String,
   comments: {
     type: [
       {
         author: { name: String, img: String },
         body: String,
-        likes: { type: Number, default: 0 },
-        date: { type: Date, default: Date.now },
+        date: { type: Date, default: Date.now() },
+        likes: { type: [{ type: String }], default: [] },
+        isEdited: { type: Boolean, default: false },
       },
     ],
     default: [],
