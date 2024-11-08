@@ -5,7 +5,7 @@ const authController = require("../controllers/authController");
 router
   .route("/")
   .get((req, res) => {
-    if (req.user) res.redirect("/");
+    if (req.user) return res.redirect("/");
     res.render("pages/login");
   })
   .post(authController.handleLogin, (req, res) => {

@@ -32,6 +32,7 @@ app.use("/login", require("./routes/login"));
 app.use("/logout", require("./routes/logout"));
 app.use("/signup", require("./routes/signup"));
 app.use("/blogs", require("./routes/blogs"));
+app.use("/users", require("./routes/users"));
 
 // Routes
 app.get("/", (req, res) => {

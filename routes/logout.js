@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/authController");
 
-router.all("/", authController.handleLogout, (req, res) => {
+router.post("/", authController.handleLogout, (req, res) => {
   res.render("pages/index", { popup: req.popup });
 });
 

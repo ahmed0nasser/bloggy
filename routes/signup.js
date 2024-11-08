@@ -5,7 +5,7 @@ const registerController = require("../controllers/registerController");
 router
   .route("/")
   .get((req, res) => {
-    if (req.user) res.redirect("/");
+    if (req.user) return res.redirect("/");
     res.render("pages/signup");
   })
   .post(registerController.handleSignup, (req, res) => {
