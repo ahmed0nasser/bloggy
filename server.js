@@ -1,8 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
-const mongoose = require("mongoose");
-const usersController = require("./controllers/usersController");
+const dbConfig = require("./config/dbConfig");
 // Require Middleware
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
@@ -16,16 +15,8 @@ const accessLogStream = fs.createWriteStream(
   { flags: "a" }
 );
 
-setImmediate(async () => {
-  // Connect to DB
-  await mongoose.connect(process.env.DB_CONNECTION_STRING);
-  // Create admin if not exists
-  if (!(await usersController.getUserByName(process.env.ADMIN_USERNAME)))
-    await usersController.createNewAdmin(
-      process.env.ADMIN_USERNAME,
-      process.env.ADMIN_PASSWORD
-    );
-});
+// Issue DB connenction
+dbConfig();
 
 // Template Engine
 app.set("view engine", "ejs");
