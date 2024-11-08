@@ -1,59 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css" />
+    <!-- Scripts -->
+    <script src="/js/retrieveScroll.js" defer></script>
     <!-- Favicon -->
     <%- include("../components/favicon") %>
     <!-- Title -->
     <title>Blogs - Bloggy</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <%- include("../components/header", {user: locals.user}) %>
-        <main>
-            <div class="container">
-                <section class="py-4">
-                    <div class="space-y-2">
-                        <h1 class="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-bold">Blogs</h1>
-                        <hr class="separator">
-                    </div>
-                    <section class="py-5 grid gap-6 xl:gap-8 grid-cols-[repeat(auto-fit,minmax(17rem,1fr))]">
-                        <% if (!locals.blogEntries || locals.blogEntries.length==0) {%>
-                            <div
-                                class="min-h-[70vh] flex justify-center items-center font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
-                                Sorry, No Blogs Available Right Now.</div>
-                            <% } else locals.blogEntries.forEach(blogEntry=> { %>
-                                <article
-                                    class="h-fit px-3 xl:px-4 py-3 xl:py-4 border-2 border-secondary rounded-lg bg-grey-light/10">
-                                    <div>
-                                        <h2 class="text-xl md:text-2xl xl:text-3xl font-bold">
-                                            <%= blogEntry.title %>
-                                        </h2>
-                                        <div class="-mt-0.5 text-xs md:text-sm lg:text-base text-grey-heavy">
-                                            <%= blogEntry.date %>
-                                        </div>
-                                    </div>
-                                    <p class="py-2 text-sm md:text-base xl:text-lg">
-                                        <%= blogEntry.description %>
-                                    </p>
-                                    <div class="text-right md:mt-2">
-                                        <a href="<%= " /blogs/" + blogEntry.id %>"
-                                            class="py-1 px-2 xl:px-3 rounded-md text-sm lg:text-base xl:text-lg
-                                            text-white
-                                            bg-primary hover:bg-secondary duration-500">Read
-                                            more</a>
-                                    </div>
-                                </article>
-                                <% }); %>
-                    </section>
-                </section>
+    <main>
+      <div class="container">
+        <section class="py-4">
+          <div class="space-y-2">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-bold">
+              Blogs
+            </h1>
+            <hr class="separator" />
+          </div>
+          <section
+            class="py-5 grid gap-6 xl:gap-8 grid-cols-[repeat(auto-fit,minmax(17rem,1fr))]"
+          >
+            <% if (!locals.blogs || locals.blogs.length==0) {%>
+            <div
+              class="min-h-[70vh] flex justify-center items-center font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl"
+            >
+              Sorry, No Blogs Available Right Now.
             </div>
-        </main>
-        <%- include("../components/footer") %>
-</body>
-
+            <% } else locals.blogs.forEach(blog=> { %>
+            <article
+              class="h-fit px-3 xl:px-4 py-3 xl:py-4 border-2 border-secondary rounded-lg bg-grey-light/10"
+            >
+              <div>
+                <h2 class="text-xl md:text-2xl xl:text-3xl font-bold">
+                  <%= blog.title %>
+                </h2>
+                <div
+                  class="-mt-0.5 text-xs md:text-sm lg:text-base text-grey-heavy"
+                >
+                  <%= blog.date %>
+                </div>
+              </div>
+              <p class="py-2 text-sm md:text-base xl:text-lg">
+                <%= blog.summary %>
+              </p>
+              <div class="flex justify-end gap-2 md:mt-2">
+                <a
+                  href="<%= `/blogs/${blog.uri}` %>"
+                  class="py-1 px-2 xl:px-3 rounded-md text-sm lg:text-base xl:text-lg text-white bg-primary hover:bg-secondary duration-500"
+                  ><%= locals.user?.isAdmin? "View" : "Read more" %></a
+                >
+                <% if (locals.user?.isAdmin) { %>
+                <a
+                  href="<%= `/blogs/${blog.uri}/edit` %>"
+                  class="py-1 px-2 xl:px-3 rounded-md text-sm lg:text-base xl:text-lg text-white bg-primary hover:bg-secondary duration-500"
+                  >Edit</a
+                >
+                <form action="<%= `/blogs/${blog.uri}/delete` %>" method="post">
+                  <input
+                    type="submit"
+                    value="Delete"
+                    class="py-1 px-2 xl:px-3 rounded-md text-sm lg:text-base xl:text-lg text-white bg-primary hover:bg-secondary duration-500 cursor-pointer"
+                  />
+                </form>
+                <% } %>
+              </div>
+            </article>
+            <% }); %>
+          </section>
+        </section>
+      </div>
+    </main>
+    <%- include("../components/footer") %>
+  </body>
 </html>
