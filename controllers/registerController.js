@@ -2,9 +2,9 @@ const { validateUserInfo } = require("./validationController");
 const { createNewSession } = require("./sessionController");
 const usersController = require("./usersController");
 // Errors
-const RequestError = require("../Errors/RequestError");
-const UnexpectedError = require("../Errors/UnexpectedError");
-const SameUserError = require("../Errors/SameUserError");
+const RequestError = require("../errors/RequestError");
+const UnexpectedError = require("../errors/UnexpectedError");
+const SameUserError = require("../errors/SameUserError");
 // Constants
 const SESSION_COOKIE = {
   name: "sessionId",

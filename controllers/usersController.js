@@ -26,4 +26,8 @@ async function getUserByName(username) {
   return await User.findOne({ name: username });
 }
 
-module.exports = { createNewUser, createNewAdmin, getUserByName };
+async function getUsers() {
+  return await User.find({});
+}
+
+module.exports = { createNewUser, createNewAdmin, getUserByName, getUsers };

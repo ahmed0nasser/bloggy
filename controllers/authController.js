@@ -3,10 +3,10 @@ const { validateUserInfo } = require("./validationController");
 const { createNewSession, deleteSession } = require("./sessionController");
 const { getUserByName } = require("./usersController");
 // Errors
-const RequestError = require("../Errors/RequestError");
-const UnexpectedError = require("../Errors/UnexpectedError");
-const WrongPasswordError = require("../Errors/WrongPasswordError");
-const NotFoundError = require("../Errors/NotFoundError");
+const RequestError = require("../errors/RequestError");
+const UnexpectedError = require("../errors/UnexpectedError");
+const WrongPasswordError = require("../errors/WrongPasswordError");
+const NotFoundError = require("../errors/NotFoundError");
 // Constants
 const SESSION_COOKIE = {
   name: "sessionId",
