@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const { validateUserInfo } = require("./validationController");
 const { createNewSession, deleteSession } = require("./sessionController");
-const { getUserByName } = require("./usersController");
+const { getUserByName } = require("../models/User");
 // Errors
 const RequestError = require("../errors/RequestError");
 const UnexpectedError = require("../errors/UnexpectedError");

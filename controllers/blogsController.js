@@ -1,5 +1,4 @@
 const Blog = require("../models/Blog");
-const Counter = require("../models/Counter");
 const utils = require("../utils/utils");
 // Errors
 const RequestError = require("../errors/RequestError");
@@ -10,7 +9,7 @@ const UnexpectedError = require("../errors/UnexpectedError");
 async function handleNewBlog(req, res, next) {
   const { title, body, summary } = req.body;
   try {
-    await createNewBlog({ title, body, summary });
+    await Blog.createNewBlog({ title, body, summary });
   } catch (error) {
     req.popup = error instanceof RequestError ? error : new UnexpectedError();
   }
@@ -21,7 +20,7 @@ async function handleBlogEdit(req, res, next) {
   const { title, body, summary } = req.body;
   const blogId = utils.getBlogIdFromUri(req.params.blogUri);
   try {
-    await updateBlog(blogId, { title, body, summary });
+    await Blog.updateBlog(blogId, { title, body, summary });
   } catch (error) {
     req.popup = error instanceof RequestError ? error : new UnexpectedError();
   }
@@ -31,7 +30,7 @@ async function handleBlogEdit(req, res, next) {
 async function handleBlogFetch(req, res, next) {
   const blogId = utils.getBlogIdFromUri(req.params.blogUri);
   try {
-    req.blog = await getBlog(blogId);
+    req.blog = await Blog.getBlog(blogId);
   } catch (error) {
     req.popup = error instanceof RequestError ? error : new UnexpectedError();
   }
@@ -41,40 +40,11 @@ async function handleBlogFetch(req, res, next) {
 async function handleBlogDelete(req, res, next) {
   const blogId = utils.getBlogIdFromUri(req.params.blogUri);
   try {
-    await deleteBlog(blogId);
+    await Blog.deleteBlog(blogId);
   } catch (error) {
     req.popup = error instanceof RequestError ? error : new UnexpectedError();
   }
   next();
-}
-
-async function getBlog(blogId) {
-  return await Blog.findById(blogId);
-}
-
-async function getAllBlogs() {
-  return await Blog.find({});
-}
-
-async function createNewBlog({ title, body, summary }) {
-  const blogCounter = await Counter.findById("blog");
-  const blogId = await blogCounter.getNextSequenceValue();
-  const date = utils.formatBlogDate(Date.now());
-  const uri = utils.constructBlogUri(title, blogId);
-  await Blog.create({ _id: blogId, title, body, summary, date, uri });
-  return blogId;
-}
-
-async function updateBlog(blogId, { title, body, summary }) {
-  const date = utils.formatBlogDate(Date.now());
-  const uri = utils.constructBlogUri(title, blogId);
-  await Blog.findByIdAndUpdate(blogId, { title, body, summary, date, uri });
-  return blogId;
-}
-
-async function deleteBlog(blogId) {
-  await Blog.findByIdAndDelete(blogId);
-  return blogId;
 }
 
 module.exports = {
@@ -82,9 +52,4 @@ module.exports = {
   handleBlogEdit,
   handleBlogFetch,
   handleBlogDelete,
-  getBlog,
-  getAllBlogs,
-  createNewBlog,
-  updateBlog,
-  deleteBlog,
 };

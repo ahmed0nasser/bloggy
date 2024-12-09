@@ -1,4 +1,5 @@
-const utils = require("../utils/utils");
+const Comment = require("../models/Comment");
+
 // Errors
 const RequestError = require("../errors/RequestError");
 const UnauthenticatedError = require("../errors/UnauthenticatedError");
@@ -12,7 +13,7 @@ async function handleNewComment(req, res, next) {
     const { comment: commentBody } = req.body;
     if (!commentBody) throw new RequestError("Comment must not be empty", 400);
     if (!req.user) throw new UnauthenticatedError();
-    await createNewComment(req.blog, req.user, commentBody);
+    await Comment.createNewComment(req.blog, req.user, commentBody);
   } catch (error) {
     req.popup = error instanceof RequestError ? error : new UnexpectedError();
   }
@@ -35,7 +36,7 @@ async function handleCommentEdit(req, res, next) {
       req.params.commentIndex >= req.blog.comments.length
     )
       throw new RequestError("Invalid Comment Index", 400);
-    await updateComment(req.blog, req.params.commentIndex, commentBody);
+    await Comment.updateComment(req.blog, req.params.commentIndex, commentBody);
   } catch (error) {
     req.popup = error instanceof RequestError ? error : new UnexpectedError();
   }
@@ -57,7 +58,7 @@ async function handleCommentDelete(req, res, next) {
       req.params.commentIndex >= req.blog.comments.length
     )
       throw new RequestError("Invalid Comment Index", 400);
-    await deleteComment(req.blog, req.params.commentIndex);
+    await Comment.deleteComment(req.blog, req.params.commentIndex);
   } catch (error) {
     req.popup = error instanceof RequestError ? error : new UnexpectedError();
   }
@@ -72,39 +73,12 @@ async function handleCommentLike(req, res, next) {
       req.params.commentIndex >= req.blog.comments.length
     )
       throw new RequestError("Invalid Comment Index", 400);
-    await toggleCommentLike(req.blog, req.params.commentIndex, req.user.name);
+    await Comment.toggleCommentLike(req.blog, req.params.commentIndex, req.user.name);
     await req.blog.save();
   } catch (error) {
     req.popup = error instanceof RequestError ? error : new UnexpectedError();
   }
   next();
-}
-
-async function createNewComment(blog, commentAuthor, commentBody) {
-  const author = { name: commentAuthor.name, img: commentAuthor.img };
-  const date = utils.formatBlogDate(Date.now());
-  blog.comments.unshift({ author, date, body: commentBody });
-  await blog.save();
-}
-
-async function updateComment(blog, commentIndex, commentBody) {
-  const comment = blog.comments[commentIndex];
-  comment.isEdited = true;
-  comment.body = commentBody;
-  comment.date = Date.now();
-  await blog.save();
-}
-
-async function deleteComment(blog, commentIndex) {
-  blog.comments.splice(commentIndex, 1);
-  await blog.save();
-}
-
-async function toggleCommentLike(blog, commentIndex, likerName) {
-  const { likes } = blog.comments[commentIndex];
-  const likerIndex = likes.indexOf(likerName);
-  likerIndex === -1 ? likes.push(likerName) : likes.splice(likerIndex, 1);
-  await blog.save();
 }
 
 module.exports = {
