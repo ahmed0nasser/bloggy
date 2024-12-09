@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const blogsController = require("../controllers/blogsController");
+const Blog = require("../models/Blog");
 
 router.get("/", async (req, res) => {
-  const blogs = await blogsController.getAllBlogs();
+  const blogs = await Blog.getAllBlogs();
   res.render("pages/blogs", { user: req.user, blogs });
 });
 
