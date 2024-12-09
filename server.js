@@ -1,21 +1,12 @@
-const fs = require("fs");
-const path = require("path");
 const express = require("express");
 const dbConfig = require("./config/dbConfig");
 // Require Middleware
-const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const session = require("./middleware/session");
 
 const app = express();
 
-// Create log stream
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, "access.log"),
-  { flags: "a" }
-);
-
-// Issue DB connenction
+// Issue DB connection
 dbConfig();
 
 // Template Engine
@@ -26,7 +17,6 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session);
-app.use(morgan("tiny", { stream: accessLogStream }));
 // Routers
 app.use("/login", require("./routes/login"));
 app.use("/logout", require("./routes/logout"));
