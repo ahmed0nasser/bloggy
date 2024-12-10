@@ -18,11 +18,11 @@
         <%- include("../components/popup", {message: locals.popup.message}) %>
     <% } %>
     <main>
-        <div class="px-8 text-center flex flex-col">
-            <h1 class="mt-16 text-3xl sm:text-4xl lg:text-5xl font-bold">Log in</h1>
+        <div class="flex flex-col px-8 text-center">
+            <h1 class="mt-16 text-3xl font-bold sm:text-4xl lg:text-5xl">Log in</h1>
             <form method="post" class="*:mt-5 md:*:mt-7">
-                <div class="sm:px-24 lg:px-40 xl:px-80 space-y-3 sm:space-y-5 flex flex-col">                    
-                    <% const inputClass = "pl-2 sm:pl-4 lg:pl-6 py-1 sm:py-2 lg:py-3 border border-primary rounded focus:outline-none focus:border-secondary placeholder:text-grey-light/40" %>
+                <div class="flex flex-col space-y-3 sm:px-24 lg:px-40 xl:px-80 sm:space-y-5">                    
+                    <% const inputClass = "pl-2 sm:pl-4 lg:pl-6 py-1 sm:py-2 lg:py-3 border border-primary rounded focus:outline-none focus:border-secondary placeholder:text-gray-600" %>
                     <input type="text" name="username" placeholder="Username" required minlength="3" maxlength="30"
                         class="<%= inputClass %>">
                     <input type="password" name="password" placeholder="Password" required minlength="8"
@@ -32,9 +32,9 @@
                     Don't have an account? <a href="/signup" class="underline text-grey-heavy">Sign up</a>
                 </div>
                 <input type="submit" value="Log in"
-                    class="py-1 sm:py-2 px-7 sm:px-8 md:px-9 lg:px-10 xl:px-12 text-white md:text-lg lg:text-xl bg-primary hover:bg-secondary duration-500 cursor-pointer rounded-md">
+                    class="px-7 py-1 text-white rounded-md duration-500 cursor-pointer sm:py-2 sm:px-8 md:px-9 lg:px-10 xl:px-12 md:text-lg lg:text-xl bg-primary hover:bg-secondary">
             </form>
-            <div class="mt-5 md:mt-8 text-xs sm:text-sm md:text-base lg:text-lg ">
+            <div class="mt-5 text-xs md:mt-8 sm:text-sm md:text-base lg:text-lg">
                 Make sure that you have both read and agree to our <a href="/policies" class="underline">Terms of Service and
                     Privacy Policy.</a>
             </div>
