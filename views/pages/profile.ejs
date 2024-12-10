@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <!-- Scripts -->
+    <script src="/js/retrieveScroll.js" defer></script>
+    <!-- Favicon -->
+    <%- include("../components/favicon") %>
+    <!-- Title -->
+    <title><%= locals.user.name %> Profile - Bloggy</title>
+  </head>
+
+  <body>
+    <%- include("../components/header", {user: locals.user}) %>
+    <main>
+      <div class="p-2 space-y-4">
+        <!-- User Profile Section -->
+        <section class="space-y-2 md:space-y-4 w-full h-full border border-primary rounded">
+          <div class="px-2 text-white bg-primary sm:text-lg lg:text-xl">
+            <h1>
+              <span class="font-bold"><%= locals.user.name %></span> Profile
+            </h1>
+          </div>
+          <article class="flex flex-col justify-center items-center">
+            <div class="relative">
+              <img
+                src="<%= locals.user.img %>"
+                alt="<%= locals.user.name %> image"
+                class="rounded-full w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32"
+              />
+            </div>
+            <div class="text-lg sm:text-xl lg:text-2xl"><%= locals.user.name %></div>
+            <p class="px-4 text-center text-stone-600 lg:text-lg">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem
+              adipisci incidunt
+            </p>
+          </article>
+          <div class="text-center text-white">
+            <button id="editBtn" class="sm:w-1/4 py-1 px-2 md:px-3 lg:px-4 lg:text-lg bg-primary hover:bg-secondary duration-500 rounded">Edit Profile</button>
+          </div>
+          <article
+            class="py-1 px-8 sm:px-12 md:px-16 lg:px-20 xl:px-24 2xl:px-28 flex justify-between border-t border-primary text-sm sm:text-base lg:text-lg"
+          >
+          <p>Joined: <span class="text-stone-700">date</span></p>
+          <p>Last Profile Update: <span class="text-stone-700">date</span></p>
+          </article>
+        </section>
+        <!-- Latest Interactions Section -->
+        <section class="w-full h-full border border-primary rounded">
+          <div class="px-2 text-white bg-primary sm:text-lg lg:text-xl">
+            <h2>Latest Interactions</h2>
+          </div>
+          <article>
+            <div
+              class="p-2 md:text-lg border-b-2 border-primary hover:bg-stone-200 duration-500"
+            >
+              <p class="text-stone-700 hover:underline">Nov, 11, 2024 11:50AM</p>
+              <p>
+                <span class="font-bold">Liked</span>
+                <a href="" class="text-primary hover:text-secondary duration-500">this long blog name</a>
+              </p>
+            </div>
+            <div
+              class="p-2 md:text-lg border-b-2 border-primary hover:bg-stone-200 duration-500"
+            >
+              <p class="text-stone-700 hover:underline">Nov, 11 2024 11:50AM</p>
+              <p>
+                <span class="font-bold">Commented on</span>
+                <a href="" class="text-primary hover:text-secondary duration-500">this long blog</a>
+                <p class="px-4 text-stone-600">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident, dolor commodi. Sit, non illo dolorum necessitatibus similique placeat tempore dolor rerum alias ad nostrum, consectetur impedit. Recusandae, officia? Aliquam, laboriosam.
+                </p>
+              </p>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+    <%- include("../components/footer") %>
+  </body>
+</html>
