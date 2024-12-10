@@ -1,21 +1,12 @@
 const bcrypt = require("bcrypt");
 const { validateUserInfo } = require("./validationController");
-const { createNewSession, deleteSession } = require("./sessionController");
+const { createNewSession, deleteSession, SESSION_COOKIE } = require("./sessionController");
 const { getUserByName } = require("../models/User");
 // Errors
 const RequestError = require("../errors/RequestError");
 const UnexpectedError = require("../errors/UnexpectedError");
 const WrongPasswordError = require("../errors/WrongPasswordError");
 const NotFoundError = require("../errors/NotFoundError");
-// Constants
-const SESSION_COOKIE = {
-  name: "sessionId",
-  options: {
-    httpOnly: true,
-    secure: true,
-    maxAge: 24 * 60 * 60 * 1000,
-  },
-};
 
 async function handleLogin(req, res, next) {
   const { username, password } = req.body;

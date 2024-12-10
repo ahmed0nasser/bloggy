@@ -1,12 +1,6 @@
 const { Schema } = require("mongoose");
-const fs = require("fs");
-const path = require("path");
 
-const PROFILE_IMAGE =
-  "data:image/png;base64," +
-  fs.readFileSync(path.join(__dirname, "..", "public", "imgs", "person.png"), {
-    encoding: "base64",
-  });
+const PROFILE_IMAGE = "/imgs/person.png";
 
 module.exports = new Schema({
   _id: Number,

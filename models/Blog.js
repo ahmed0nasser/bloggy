@@ -1,6 +1,7 @@
 const { model } = require("mongoose");
 const blogSchema = require("../schemas/blogSchema");
 const Counter = require("../models/Counter");
+const utils = require("../utils/utils")
 const Blog = model("Blog", blogSchema);
 
 async function getBlog(blogId) {

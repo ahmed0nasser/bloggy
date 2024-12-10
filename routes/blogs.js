@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const blogsController = require("../controllers/blogsController");
-const Blog = require("../models/Blog");
+const { getAllBlogs } = require("../models/Blog");
 
 router.get("/", async (req, res) => {
-  const blogs = await Blog.getAllBlogs();
+  const blogs = await getAllBlogs();
   res.render("pages/blogs", { user: req.user, blogs });
 });
 
@@ -39,7 +39,11 @@ router.post(
   }
 );
 
-router.use("/:blogUri/comments", blogsController.handleBlogFetch, require("./comments"))
+router.use(
+  "/:blogUri/comments",
+  blogsController.handleBlogFetch,
+  require("./comments")
+);
 
 router.get("/:blogUri", blogsController.handleBlogFetch, (req, res) => {
   req.popup

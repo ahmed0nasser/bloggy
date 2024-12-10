@@ -2,14 +2,6 @@ const express = require("express");
 const router = express.Router();
 const commentsController = require("../controllers/commentsController");
 
-function rerenderBlog(req, res) {
-  res.render("pages/blog", {
-    user: req.user,
-    blog: req.blog,
-    popup: req.popup,
-  });
-}
-
 router.post("/", commentsController.handleNewComment, (req, res) => {
   res.redirect(`/blogs/${req.blog.uri}`);
 });

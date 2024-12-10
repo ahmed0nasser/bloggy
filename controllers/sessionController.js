@@ -1,6 +1,15 @@
 const { v4: uuid } = require("uuid");
 const User = require("../models/User");
 
+const SESSION_COOKIE = {
+  name: "sessionId",
+  options: {
+    httpOnly: true,
+    secure: true,
+    maxAge: 24 * 60 * 60 * 1000,
+  },
+};
+
 async function createNewSession(userId) {
   const sessionId = uuid();
   await User.model.findByIdAndUpdate(userId, { sessionId });
@@ -22,4 +31,5 @@ module.exports = {
   createNewSession,
   getSession,
   deleteSession,
+  SESSION_COOKIE,
 };

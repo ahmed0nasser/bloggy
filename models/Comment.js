@@ -1,9 +1,6 @@
-const utils = require("../utils/utils");
-
 async function createNewComment(blog, commentAuthor, commentBody) {
   const author = { name: commentAuthor.name, img: commentAuthor.img };
-  const date = utils.formatBlogDate(Date.now());
-  blog.comments.unshift({ author, date, body: commentBody });
+  blog.comments.unshift({ author, body: commentBody });
   await blog.save();
 }
 
@@ -20,10 +17,10 @@ async function deleteComment(blog, commentIndex) {
   await blog.save();
 }
 
-async function toggleCommentLike(blog, commentIndex, likerName) {
+async function toggleCommentLike(blog, commentIndex, likerID) {
   const { likes } = blog.comments[commentIndex];
-  const likerIndex = likes.indexOf(likerName);
-  likerIndex === -1 ? likes.push(likerName) : likes.splice(likerIndex, 1);
+  const likerIndex = likes.indexOf(likerID);
+  likerIndex === -1 ? likes.push(likerID) : likes.splice(likerIndex, 1);
   await blog.save();
 }
 

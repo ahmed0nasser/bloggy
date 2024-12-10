@@ -13,7 +13,7 @@ module.exports = new Schema({
         author: { name: String, img: String },
         body: String,
         date: { type: Date, default: Date.now() },
-        likes: { type: [{ type: String }], default: [] },
+        likes: { type: [{ type: Number }], default: [] },
         isEdited: { type: Boolean, default: false },
       },
     ],

@@ -73,7 +73,7 @@ async function handleCommentLike(req, res, next) {
       req.params.commentIndex >= req.blog.comments.length
     )
       throw new RequestError("Invalid Comment Index", 400);
-    await Comment.toggleCommentLike(req.blog, req.params.commentIndex, req.user.name);
+    await Comment.toggleCommentLike(req.blog, req.params.commentIndex, req.user._id);
     await req.blog.save();
   } catch (error) {
     req.popup = error instanceof RequestError ? error : new UnexpectedError();
