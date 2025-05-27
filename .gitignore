@@ -1,4 +1,8 @@
 /node_modules
+/public/css/
+/public/imgs/1.jpeg
+/public/imgs/2.jpeg
+/middleware/isAuth.js
 .env
 mongod
 access.log
